@@ -2,11 +2,10 @@ const DB = require('../models');
 const ResponseHelper = require('../utils/response');
 
 class CategoryController  {
-
   static async getAll(req, res) {
     try {
       const items = await DB.Category.find();
-      return ResponseHelper.success(res, items, 'sukses mengambil data kategori');
+      return ResponseHelper.success(res, items);
     } catch (error) {
       return ResponseHelper.error(res, error.message);
     }
@@ -14,47 +13,51 @@ class CategoryController  {
 
   static async getById(req, res) {
     try {
-      const items = await DB.Category.findById(req.params.id);
+      if(!req.params.id) {
+        return ResponseHelper.error(res, "ID is required", 400)
+      }
+      const items = await DB.Category.findById(req.params.id)
       return ResponseHelper.success(res, items);
     } catch (error) {
-      return ResponseHelper.error(res, error.message);
+      return ResponseHelper.error(res, error.message, error.kind === 'ObjectId' ? 400 : 500);
     }
   }
 
   static async create(req, res) {
     try {
       const items = await DB.Category.create(req.body);
-      return ResponseHelper.success(res, items);
+      return ResponseHelper.success(res, items, 'Success', 201);
     } catch (error) {
-      return ResponseHelper.error(res, error.message);
+      let code = 500;
+      if(error.message.includes('Category validation failed') || error.code === 11000) code = 400
+      return ResponseHelper.error(res, error.message, code);
     }
   }
 
   static async update(req, res) {
     try {
-
       if(!req.params.id) {
         return ResponseHelper.error(res, 'ID not provided!', 400);
       }
-
       const items = await DB.Category.findByIdAndUpdate(req.params.id, req.body);
       return ResponseHelper.success(res, items);
     } catch (error) {
-      return ResponseHelper.error(res, error.message);
+      let code = 500;
+      if(error.kind === 'ObjectId' || error.code === 11000) code = 400
+      return ResponseHelper.error(res, error.message, code);
     }
   }
 
   static async delete(req, res) {
     try {
-      
       if(!req.params.id) {
         return ResponseHelper.error(res, 'ID not provided!', 400);
       }
-
       const items = await DB.Category.findByIdAndDelete(req.params.id);
       return ResponseHelper.success(res, items);
     } catch (error) {
-      return ResponseHelper.error(res, error.message);
+      let code = (error.kind === 'ObjectId') ? 400 : 500;
+      return ResponseHelper.error(res, error.message, code);
     }
   }
 }

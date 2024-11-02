@@ -13,10 +13,13 @@ class BookController  {
 
   static async getById(req, res) {
     try {
+      if(!req.params.id) {
+        return ResponseHelper.error(res, "ID is required", 400)
+      }
       const items = await DB.Book.findById(req.params.id).populate('categoryId', 'name description').populate('authorId', 'name bio')
       return ResponseHelper.success(res, items);
     } catch (error) {
-      return ResponseHelper.error(res, error.message);
+      return ResponseHelper.error(res, error.message, error.kind === 'ObjectId' ? 400 : 500);
     }
   }
 

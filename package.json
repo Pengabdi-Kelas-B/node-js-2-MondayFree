@@ -4,8 +4,9 @@
   "description": "tugas minggu 8 backend",
   "main": "index.js",
   "scripts": {
-    "start": "NODE_OPTIONS='-r dotenv/config' DOTENV_CONFIG_PATH='./src/.env' nodemon src/app.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "nodemon src/app.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "seed": "node src/seeder.js"
   },
   "keywords": [],
   "author": "vocasia mentor batch 7",

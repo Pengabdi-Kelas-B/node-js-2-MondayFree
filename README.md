@@ -1,5 +1,7 @@
 # Tugas Week 8 - Backend Development
 
+## Luji Ramdhan
+
 ## Deskripsi 
 Pak Mulyono punya sebuah toko buku bernama "Markas Baca".Bisnis pak mul ini sudah berjalan sekitar kurang lebih 20 tahun dan sekarang beliau ingin untuk mengembankan bisnis nya kearah digital agar tetap eksis di pasaran.Pak mul memintamu untuk membuat sebuah aplikasi untuk mendukung salah satu kegiatan operasional nya dalam hal peminjaman buku,kamu diminta untuk membuat sebuah aplikasi manajemen peminjaman buku yang untuk membantu pencatatan peminjaman buku.Pak Mulyono ingin aplikasi ini mempunyai sebuah fitur sebagai berikut : 
 

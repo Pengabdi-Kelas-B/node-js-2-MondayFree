@@ -4,6 +4,7 @@ const categoryRouter = require("./category_routes")
 const bookRouter = require("./book_routes")
 const authorRouter = require("./author_routes")
 const borrowerRouter = require("./borrower_routes")
+const borrowingRouter = require("./borrowing_routes")
 
 const routes = express.Router()
 
@@ -13,6 +14,7 @@ routes.use(categoryRouter)
 routes.use(bookRouter)
 routes.use(authorRouter)
 routes.use(borrowerRouter)
+routes.use(borrowingRouter)
 
 
 module.exports = routes
